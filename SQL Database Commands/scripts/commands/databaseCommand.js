@@ -48,11 +48,11 @@
                     for (var i = 0; i < _content.length; i++) {
                         $.inidb.del(databaseCmd_status[1], _content[i]);
                     }
-                    $.say('[./phantombot.db] Table \'' + databaseCmd_status[1] + '\' was successfully cleared.');
+                    $.say($.lang.get('[./phantombot.db]', + 'database.command.event.command.table', + '\'', + databaseCmd_status[1], + '\'', + 'database.command.event.command.table2'));
                     databaseCmd_status = [];
                 }
                 if (action.equalsIgnoreCase('no')) {
-                    $.say('[./phantombot.db] Table \'' + databaseCmd_status[1] + '\' not cleared. !dbedit reinitalized.');
+                    $.say($.lang.get('[./phantombot.db]', + 'database.command.event.command.table', + '\'', + databaseCmd_status[1], + '\'', + 'database.command.event.command.table3'));
                     databaseCmd_status = [];
                 }
             }
@@ -60,11 +60,11 @@
             if (databaseCmd_status[0] == 'removing') {
                 if (action.equalsIgnoreCase('yes')) {
                     $.inidb.del(databaseCmd_status[1], databaseCmd_status[2]);
-                    $.say('[./phantombot.db] Key \'' + databaseCmd_status[2] + '\' in table \'' + databaseCmd_status[1] + '\' was successfully removed.');
+                    $.say('[./phantombot.db]', + 'database.command.event.command.key', + '\'', + databaseCmd_status[2], + '\'', + 'database.command.event.command.table4', + '\'', + databaseCmd_status[1], + '\'', + 'database.command.event.command.table5');
                     databaseCmd_status = [];
                 }
                 if (action.equalsIgnoreCase('no')) {
-                    $.say('[./phantombot.db] Key \'' + databaseCmd_status[2] + '\' in table \'' + databaseCmd_status[1] + '\' not removed. !dbedit reinitalized.');
+                    $.say('[./phantombot.db]', + 'database.command.event.command.key', + '\'', + databaseCmd_status[2], + '\'', + 'database.command.event.command.table4', + '\'', + databaseCmd_status[1], + '\'', + 'database.command.event.command.table6');
                     databaseCmd_status = [];
                 }
             }
@@ -76,14 +76,14 @@
          */
         if (action.equalsIgnoreCase('clear')) {
             
-            if (!args[1]) { $.say('[./phantombot.db] Usage: !dbedit clear [table]'); return; }
+            if (!args[1]) { $.say($.lang.get('[./phantombot.db]', + 'database.command.commandpath.clear.usage')); return; }
             
             if ($.inidb.FileExists(args[1])) {
                 databaseCmd_status = [ 'clearing', String(args[1]) ];
-                $.say('[./phantombot.db] Are you sure you wish to clear the table \'' + args[1] + '\'? Reply with !dbedit yes or !dbedit no'); 
+                $.say($.lang.get('[./phantombot.db]', + 'database.command.commandpath.clear1', + '\'', + args[1], + '\'?', + 'database.command.commandpath.clear2')); 
                 setTimeout(function() { databaseCmd_status = []; }, 20000);
             } else {
-                $.say('[./phantombot.db] Table does not exist!');
+                $.say($.lang.get('[./phantombot.db]', + 'database.command.commandpath.clear3'));
             }
         }
 
@@ -92,14 +92,14 @@
          */
         if (action.equalsIgnoreCase('remove')) {
 
-            if (!args[2]) { $.say('[./phantombot.db] Usage: !dbedit remove [table] [key]'); return; }
+            if (!args[2]) { $.say($.lang.get('[./phantombot.db]', + 'database.command.commandpath.remove.usage')); return; }
 
             if ($.inidb.exists(args[1], args[2])) {
                 databaseCmd_status = [ 'removing', String(args[1]), String(args[2]) ];
-                $.say('[./phantombot.db] Are you sure you wish to remove the key \'' + args[2] + '\' in table \'' + args[1] + '\'? Reply with !dbedit yes or !dbedit no'); 
+                $.say($.lang.get('[./phantombot.db]', + 'database.command.commandpath.remove', + '\'', + args[2], + '\'', + 'database.command.commandpath.remove2', + '\'', + args[1], + '\'?', + 'database.command.commandpath.remove3')); 
                 setTimeout(function() { databaseCmd_status = []; }, 20000);
             } else {
-                $.say('[./phantombot.db] Table or key does not exist!');
+                $.say($.lang.get('[./phantombot.db]', + 'database.command.commandpath.remove4'));
             }
         }
     });
